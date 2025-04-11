@@ -1,0 +1,31 @@
+{
+  "family": "sonik-task",
+  "networkMode": "awsvpc",
+  "containerDefinitions": [
+    {
+      "name": "sonik-container",
+      "image": "971422699574.dkr.ecr.us-east-1.amazonaws.com/sonik-ecr:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "hostPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "sonik-logs",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::971422699574:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::971422699574:role/ecsTaskExecutionRole"
+}
